@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-vars */
 const path = require("path");
+const VueLoaderPlugin = require("vue-loader-plugin");
 module.exports = {
   // 基本路径
   publicPath: process.env.NODE_ENV === "production" ? "./" : "./",
@@ -76,13 +77,25 @@ module.exports = {
     },
     overlay: {
       // 全屏模式下是否显示脚本错误
-      warnings: true,
+      warnings: false,
       errors: true
     },
-    before: app => {}
+    before: app => { }
   },
   /**
    * 第三方插件配置
    */
-  pluginOptions: {}
+  pluginOptions: {
+    plugins: [
+      new VueLoaderPlugin()
+    ]
+  },
+  loaderOptions: {
+    loader: [
+      {
+        test: /\.vue$/,
+        use: "vue-loader"
+      }
+    ]
+  }
 };
